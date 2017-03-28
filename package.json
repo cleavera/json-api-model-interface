@@ -1,0 +1,15 @@
+{
+  "name": "json-api-model-interface",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anthony Cleaver",
+  "license": "ISC",
+  "devDependencies": {
+    "tslint": "^4.5.1",
+    "typescript": "^2.2.2"
+  }
+}
