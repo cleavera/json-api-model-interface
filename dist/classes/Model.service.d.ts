@@ -1,0 +1,31 @@
+import { Collection } from './Collection.service';
+import { ModelMeta } from "./ModelMeta.service";
+import { IHttpResponse } from "../interfaces/IHttpResponse.interface";
+import { IJSONApi } from "../interfaces/IJSONApi.interface";
+export declare class Model {
+    private _apiRoot;
+    private _meta;
+    private _attributes;
+    private _collection;
+    $resolved: boolean;
+    $promise: Promise<any>;
+    attributes: any;
+    link: any;
+    id: string;
+    type: string;
+    description: string;
+    methods: any;
+    readonly label: any;
+    constructor(promise: Promise<IHttpResponse>, root: string, collection?: Collection);
+    serialise(): IJSONApi;
+    getMeta(): ModelMeta;
+    save(): Promise<IHttpResponse>;
+    remove(): Promise<IHttpResponse>;
+    clean(): void;
+    static getRoot(url: string): Model;
+    static fromMeta(meta: ModelMeta, root: string): Model;
+    private cloneAttributes();
+    private parseLinks(links);
+    private static get(url, root);
+    private static parseAllowHeaders({allow});
+}
