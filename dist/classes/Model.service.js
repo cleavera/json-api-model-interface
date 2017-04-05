@@ -6,6 +6,7 @@ const Collection_service_1 = require("./Collection.service");
 const ModelMeta_service_1 = require("./ModelMeta.service");
 const RequestMethods_constant_1 = require("../constants/RequestMethods.constant");
 const EnumKeys_helper_1 = require("../helpers/EnumKeys.helper");
+const FieldType_constant_1 = require("../constants/FieldType.constant");
 class Model {
     constructor(promise, root, collection) {
         this.$resolved = false;
@@ -87,7 +88,12 @@ class Model {
                 if (meta.attributes[attribute].primaryKey === true) {
                     return;
                 }
-                response.body.attributes[attribute] = null;
+                if (meta.attributes[attribute].type === FieldType_constant_1.FieldType.string) {
+                    response.body.attributes[attribute] = '';
+                }
+                else {
+                    response.body.attributes[attribute] = null;
+                }
             });
             return response;
         }), root);
