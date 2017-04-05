@@ -6,6 +6,7 @@ import {RequestMethods} from "../constants/RequestMethods.constant";
 import {$enumKeys} from "../helpers/EnumKeys.helper";
 import {IHttpResponse} from "../interfaces/IHttpResponse.interface";
 import {IJSONApi} from "../interfaces/IJSONApi.interface";
+import {FieldType} from '../constants/FieldType.constant';
 
 export class Model {
   private _apiRoot: string;
@@ -123,7 +124,11 @@ export class Model {
           return;
         }
 
-        response.body.attributes[attribute] = null;
+        if (meta.attributes[attribute].type === FieldType.string) {
+          response.body.attributes[attribute] = '';
+        } else {
+          response.body.attributes[attribute] = null;
+        }
       });
 
       return response;
