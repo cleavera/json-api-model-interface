@@ -1,4 +1,4 @@
-import {$fetch} from 'webworker-http';
+import {Http} from './Http.service';
 import {Model} from "./Model.service";
 import {ModelMeta} from "./ModelMeta.service";
 import {IHttpResponse} from "../interfaces/IHttpResponse.interface";
@@ -45,7 +45,7 @@ export class Collection {
 
   public reload(): void {
     this.$resolved = false;
-    this.parseResponse($fetch(this._selfLink));
+    this.parseResponse(Http.get(this._selfLink));
   }
 
   private parseResponse(promise: Promise<IHttpResponse>): void {
@@ -62,6 +62,6 @@ export class Collection {
   }
 
   public static list(url: string, root: string): Collection {
-    return new Collection($fetch(url), root, url);
+    return new Collection(Http.get(url), root, url);
   }
 }

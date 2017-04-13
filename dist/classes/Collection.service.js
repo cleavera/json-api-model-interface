@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const webworker_http_1 = require("webworker-http");
+const Http_service_1 = require("./Http.service");
 const Model_service_1 = require("./Model.service");
 const ModelMeta_service_1 = require("./ModelMeta.service");
 class Collection {
@@ -29,7 +29,7 @@ class Collection {
     }
     reload() {
         this.$resolved = false;
-        this.parseResponse(webworker_http_1.$fetch(this._selfLink));
+        this.parseResponse(Http_service_1.Http.get(this._selfLink));
     }
     parseResponse(promise) {
         this.$promise = promise.then(({ headers, body }) => {
@@ -42,7 +42,7 @@ class Collection {
         });
     }
     static list(url, root) {
-        return new Collection(webworker_http_1.$fetch(url), root, url);
+        return new Collection(Http_service_1.Http.get(url), root, url);
     }
 }
 exports.Collection = Collection;

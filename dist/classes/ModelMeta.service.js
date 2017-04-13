@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const webworker_http_1 = require("webworker-http");
 const FieldMeta_service_1 = require("./FieldMeta.service");
+const Http_service_1 = require("./Http.service");
 class ModelMeta {
     constructor(promise) {
         this.$resolved = false;
@@ -18,7 +18,7 @@ class ModelMeta {
         return Object.keys(this.attributes).filter(attribute => this.attributes[attribute].label)[0];
     }
     static get(url) {
-        return new ModelMeta(webworker_http_1.Http.getHttpWorker().options(url));
+        return new ModelMeta(Http_service_1.Http.options(url));
     }
     static parseAttributes(attributes) {
         let out = {};

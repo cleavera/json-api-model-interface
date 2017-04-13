@@ -1,6 +1,6 @@
-import {Http} from 'webworker-http';
 import {IFieldMeta} from "../interfaces/IFieldMeta.interface";
 import {FieldMeta} from "./FieldMeta.service";
+import {Http} from './Http.service';
 
 export class ModelMeta {
   $resolved: boolean = false;
@@ -28,7 +28,7 @@ export class ModelMeta {
   }
 
   static get(url: string): ModelMeta {
-    return new ModelMeta(Http.getHttpWorker().options(url));
+    return new ModelMeta(Http.options(url));
   }
 
   private static parseAttributes(attributes: Map<string, IFieldMeta>): Map<string, FieldMeta> {

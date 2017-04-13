@@ -1,4 +1,3 @@
-import {$fetch, Http} from 'webworker-http';
 import {$partial} from '../helpers/Partial.helper';
 import {Collection} from './Collection.service';
 import {ModelMeta} from "./ModelMeta.service";
@@ -7,6 +6,7 @@ import {$enumKeys} from "../helpers/EnumKeys.helper";
 import {IHttpResponse} from "../interfaces/IHttpResponse.interface";
 import {IJSONApi} from "../interfaces/IJSONApi.interface";
 import {FieldType} from '../constants/FieldType.constant';
+import {Http} from './Http.service';
 
 export class Model {
   private _apiRoot: string;
@@ -83,10 +83,10 @@ export class Model {
 
     if (this.methods[RequestMethods.PUT]) {
       this.cloneAttributes();
-      return Http.getHttpWorker().put(url, this.serialise());
+      return Http.put(url, this.serialise());
     }
 
-    return Http.getHttpWorker().post(url, this.serialise());
+    return Http.post(url, this.serialise());
   }
 
   public remove(): Promise<IHttpResponse> {
@@ -96,7 +96,7 @@ export class Model {
 
     let url = this.link.self.url;
 
-    return Http.getHttpWorker().remove(url);
+    return Http.remove(url);
   }
 
   public clean(): void {
@@ -160,7 +160,7 @@ export class Model {
   }
 
   private static get(url: string, root: string): Model {
-    return new Model($fetch(url), root);
+    return new Model(Http.get(url), root);
   }
 
   private static parseAllowHeaders({ allow = '' }) {

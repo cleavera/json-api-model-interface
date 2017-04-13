@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const webworker_http_1 = require("webworker-http");
 const Partial_helper_1 = require("../helpers/Partial.helper");
 const Collection_service_1 = require("./Collection.service");
 const ModelMeta_service_1 = require("./ModelMeta.service");
 const RequestMethods_constant_1 = require("../constants/RequestMethods.constant");
 const EnumKeys_helper_1 = require("../helpers/EnumKeys.helper");
 const FieldType_constant_1 = require("../constants/FieldType.constant");
+const Http_service_1 = require("./Http.service");
 class Model {
     constructor(promise, root, collection) {
         this.$resolved = false;
@@ -56,16 +56,16 @@ class Model {
         let url = this.link.self.url;
         if (this.methods[RequestMethods_constant_1.RequestMethods.PUT]) {
             this.cloneAttributes();
-            return webworker_http_1.Http.getHttpWorker().put(url, this.serialise());
+            return Http_service_1.Http.put(url, this.serialise());
         }
-        return webworker_http_1.Http.getHttpWorker().post(url, this.serialise());
+        return Http_service_1.Http.post(url, this.serialise());
     }
     remove() {
         if (!this.methods[RequestMethods_constant_1.RequestMethods.DELETE]) {
             throw new Error('Model does not have the permissions to remove');
         }
         let url = this.link.self.url;
-        return webworker_http_1.Http.getHttpWorker().remove(url);
+        return Http_service_1.Http.remove(url);
     }
     clean() {
         this.attributes = this._attributes;
@@ -117,7 +117,7 @@ class Model {
         });
     }
     static get(url, root) {
-        return new Model(webworker_http_1.$fetch(url), root);
+        return new Model(Http_service_1.Http.get(url), root);
     }
     static parseAllowHeaders({ allow = '' }) {
         let allowHeaders = allow.replace(/\s/g, '').split(','), out = {};
