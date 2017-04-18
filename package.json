@@ -9,9 +9,11 @@
   },
   "author": "Anthony Cleaver",
   "license": "ISC",
+  "dependencies": {
+    "webworker-http": "https://github.com/cleavera/webworker-http.git"
+  },
   "devDependencies": {
     "tslint": "^4.5.1",
-    "typescript": "^2.2.2",
-    "webworker-http": "https://github.com/cleavera/webworker-http.git"
+    "typescript": "^2.2.2"
   }
 }
