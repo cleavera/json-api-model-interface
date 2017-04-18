@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Collection_service_1 = require("./classes/Collection.service");
 exports.Collection = Collection_service_1.Collection;
+const http_service_1 = require("./classes/http.service");
+exports.Http = http_service_1.Http;
 const Model_service_1 = require("./classes/Model.service");
 exports.Model = Model_service_1.Model;
 const FieldType_constant_1 = require("./constants/FieldType.constant");
