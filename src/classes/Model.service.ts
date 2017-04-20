@@ -124,7 +124,7 @@ export class Model {
           return;
         }
 
-        if (meta.attributes[attribute].type === FieldType.string) {
+        if ((meta.attributes[attribute].type === FieldType.string) || (meta.attributes[attribute].type === FieldType.password)) {
           response.body.attributes[attribute] = '';
         } else {
           response.body.attributes[attribute] = null;

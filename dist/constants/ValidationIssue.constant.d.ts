@@ -1,6 +1,7 @@
 export declare enum ValidationIssue {
-    MAXLENGTH = 0,
-    OPTIONS = 1,
-    REQUIRED = 2,
-    TYPE = 3,
+    JSON = 0,
+    MAXLENGTH = 1,
+    OPTIONS = 2,
+    REQUIRED = 3,
+    TYPE = 4,
 }

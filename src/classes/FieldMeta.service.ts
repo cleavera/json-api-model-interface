@@ -37,6 +37,14 @@ export class FieldMeta {
     return this.type === FieldType.boolean;
   }
 
+  isPassword() {
+    return this.type === FieldType.password;
+  }
+
+  isJSON() {
+    return this.type === FieldType.json;
+  }
+
   validate(value: any): Validation {
     let validation: Validation = new Validation();
 
@@ -54,6 +62,10 @@ export class FieldMeta {
 
     if (!this.validateOptions(value)) {
       validation.addIssue(ValidationIssue.OPTIONS);
+    }
+
+    if (!this.validateJSON(value)) {
+      validation.addIssue(ValidationIssue.JSON);
     }
 
     return validation;
@@ -80,7 +92,7 @@ export class FieldMeta {
       return typeof value === 'boolean';
     }
 
-    if (this.isString()) {
+    if (this.isString() || this.isPassword() || this.isJSON()) {
       return typeof value === 'string';
     }
 
@@ -103,6 +115,22 @@ export class FieldMeta {
     }
 
     return value.length <= this.maxLength;
+  }
+
+  private validateJSON(value: any): boolean {
+    if (!this.isJSON()) {
+      return true;
+    }
+
+    let isSuccess: boolean = true;
+
+    try {
+      JSON.parse(value);
+    } catch (e) {
+      isSuccess = false;
+    }
+
+    return isSuccess;
   }
 
   private validateRequired(value: any): boolean {

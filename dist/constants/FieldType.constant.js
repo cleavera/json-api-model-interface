@@ -6,5 +6,7 @@ var FieldType;
     FieldType[FieldType["decimal"] = 1] = "decimal";
     FieldType[FieldType["guid"] = 2] = "guid";
     FieldType[FieldType["integer"] = 3] = "integer";
-    FieldType[FieldType["string"] = 4] = "string";
+    FieldType[FieldType["json"] = 4] = "json";
+    FieldType[FieldType["password"] = 5] = "password";
+    FieldType[FieldType["string"] = 6] = "string";
 })(FieldType = exports.FieldType || (exports.FieldType = {}));

@@ -24,6 +24,12 @@ class FieldMeta {
     isBoolean() {
         return this.type === FieldType_constant_1.FieldType.boolean;
     }
+    isPassword() {
+        return this.type === FieldType_constant_1.FieldType.password;
+    }
+    isJSON() {
+        return this.type === FieldType_constant_1.FieldType.json;
+    }
     validate(value) {
         let validation = new Validation_service_1.Validation();
         if (!this.validateType(value)) {
@@ -37,6 +43,9 @@ class FieldMeta {
         }
         if (!this.validateOptions(value)) {
             validation.addIssue(ValidationIssue_constant_1.ValidationIssue.OPTIONS);
+        }
+        if (!this.validateJSON(value)) {
+            validation.addIssue(ValidationIssue_constant_1.ValidationIssue.JSON);
         }
         return validation;
     }
@@ -57,7 +66,7 @@ class FieldMeta {
         if (this.isBoolean()) {
             return typeof value === 'boolean';
         }
-        if (this.isString()) {
+        if (this.isString() || this.isPassword() || this.isJSON()) {
             return typeof value === 'string';
         }
         if (this.isNumber()) {
@@ -75,6 +84,19 @@ class FieldMeta {
             return true;
         }
         return value.length <= this.maxLength;
+    }
+    validateJSON(value) {
+        if (!this.isJSON()) {
+            return true;
+        }
+        let isSuccess = true;
+        try {
+            JSON.parse(value);
+        }
+        catch (e) {
+            isSuccess = false;
+        }
+        return isSuccess;
     }
     validateRequired(value) {
         if (this.isNumber()) {

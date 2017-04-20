@@ -3,5 +3,7 @@ export declare enum FieldType {
     decimal = 1,
     guid = 2,
     integer = 3,
-    string = 4,
+    json = 4,
+    password = 5,
+    string = 6,
 }

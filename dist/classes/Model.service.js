@@ -88,7 +88,7 @@ class Model {
                 if (meta.attributes[attribute].primaryKey === true) {
                     return;
                 }
-                if (meta.attributes[attribute].type === FieldType_constant_1.FieldType.string) {
+                if ((meta.attributes[attribute].type === FieldType_constant_1.FieldType.string) || (meta.attributes[attribute].type === FieldType_constant_1.FieldType.password)) {
                     response.body.attributes[attribute] = '';
                 }
                 else {

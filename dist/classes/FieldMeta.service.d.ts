@@ -11,10 +11,13 @@ export declare class FieldMeta {
     isString(): boolean;
     isNumber(): boolean;
     isBoolean(): boolean;
+    isPassword(): boolean;
+    isJSON(): boolean;
     validate(value: any): Validation;
     viewValue(value: any): string;
     private validateType(value);
     private validateOptions(value);
     private validateMaxLength(value);
+    private validateJSON(value);
     private validateRequired(value);
 }
