@@ -30,6 +30,9 @@ class FieldMeta {
     isJSON() {
         return this.type === FieldType_constant_1.FieldType.json;
     }
+    isForeignKey() {
+        return this.type === FieldType_constant_1.FieldType.foreignKey;
+    }
     validate(value) {
         let validation = new Validation_service_1.Validation();
         if (!this.validateType(value)) {

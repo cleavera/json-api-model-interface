@@ -13,6 +13,7 @@ export declare class FieldMeta {
     isBoolean(): boolean;
     isPassword(): boolean;
     isJSON(): boolean;
+    isForeignKey(): boolean;
     validate(value: any): Validation;
     viewValue(value: any): string;
     private validateType(value);
