@@ -45,6 +45,10 @@ export class FieldMeta {
     return this.type === FieldType.json;
   }
 
+  isForeignKey() {
+    return this.type === FieldType.foreignKey;
+  }
+
   validate(value: any): Validation {
     let validation: Validation = new Validation();
 
